@@ -20,7 +20,7 @@ function Booklist() {
                   {books.map(book => (
                     <li key={book._id}>
                         <strong>
-                          {book.title} by {book.author}
+                          {book.title} by {book.authors}
                         </strong>
                     </li>
                   ))}
