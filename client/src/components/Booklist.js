@@ -26,7 +26,7 @@ function Booklist() {
                   ))}
                 </ul>
               ) : (
-                <h3>No books have been saved</h3>
+                <h3>No books have been saved, try <a href="/search">searching</a> for a book to add!</h3>
               )}
         </div>
     )
