@@ -1,6 +1,8 @@
 import './App.css';
 import Saved from './pages/Saved';
 import Search from './pages/Search';
+import Nav from './components/Nav';
+import Header from './components/Header';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -8,6 +10,8 @@ function App() {
     <Router>
     <div>
       {/* stuff here displayed on all */}
+      <Nav />
+      <Header />
       <Switch>
         <Route exact path={["/", "/saved"]}>
           <Saved />
