@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
 const db = require("./models")
+const dotenv = require("dotenv");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

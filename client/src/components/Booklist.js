@@ -26,17 +26,22 @@ function Booklist() {
     return (
         <div>
             {books.length ? (
-                <ul>
+                <div className="container text-center">
+                  <div className="row justify-content-center">
                   {books.map(book => (
-                    <li key={book._id} style={{"clear": "both"}}>
-                      <strong>
-                        {book.title} by {book.authors}
-                      </strong>
-                      <a href={book.link} style={{"float": "right"}}>View</a>
-                      <button style={{"float": "right"}} onClick={() => deleteBook(book._id)}>Delete</button>
-                    </li>
+
+                    <div key={book.link} className="card bg-light m-1" style={{"width": "30%"}}>
+                      <h3 className="card-title m-2"><strong>{book.title}</strong></h3>
+                      <img src={book.image} className="card-img-top" alt="..." style={{"height": "28rem"}}></img>
+                      <div className="card-body">
+                        <p className="card-text">{book.description}</p>
+                        <a className="btn btn-primary m-1" href={book.link}>Details</a>
+                        <button className="btn btn-primary m-1" onClick={() => deleteBook(book._id)}>Remove</button>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                  </div>
+                </div>
               ) : (
                 <h3>No books have been saved, try <a href="/search">searching</a> for a book to add!</h3>
               )}
