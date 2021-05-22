@@ -18,10 +18,11 @@ function Booklist() {
             {books.length ? (
                 <ul>
                   {books.map(book => (
-                    <li key={book._id}>
-                        <strong>
-                          {book.title} by {book.authors}
-                        </strong>
+                    <li key={book._id} style={{"clear": "both"}}>
+                      <strong>
+                        {book.title} by {book.authors}
+                      </strong>
+                      <a href={book.link} style={{"float": "right"}}>View</a>
                     </li>
                   ))}
                 </ul>
