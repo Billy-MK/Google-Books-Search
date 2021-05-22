@@ -6,12 +6,22 @@ function Booklist() {
     const [books, setBooks] = useState([])
 
     useEffect(() => {
-        API.getBooks()
-        .then(res => 
-          setBooks(res.data)
-        )
-        .catch(err => console.log(err));
+        loadBooks()
       }, [])
+
+    function loadBooks() {
+      API.getBooks()
+      .then(res => 
+        setBooks(res.data)
+      )
+      .catch(err => console.log(err));
+    }
+    
+    function deleteBook(id) {
+      API.deleteBook(id)
+        .then(res => loadBooks())
+        .catch(err => console.log(err));
+    }
 
     return (
         <div>
@@ -23,6 +33,7 @@ function Booklist() {
                         {book.title} by {book.authors}
                       </strong>
                       <a href={book.link} style={{"float": "right"}}>View</a>
+                      <button style={{"float": "right"}} onClick={() => deleteBook(book._id)}>Delete</button>
                     </li>
                   ))}
                 </ul>
