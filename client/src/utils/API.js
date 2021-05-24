@@ -9,5 +9,9 @@ export default {
 
     deleteBook: function(id) {
       return axios.delete("/api/books/" + id)
+    },
+
+    searchBooks: function(searchTerm) {
+      return axios.get("/api/googlebooks/")
     }
 }
