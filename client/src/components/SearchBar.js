@@ -13,6 +13,16 @@ function SearchBar() {
         }
     }
 
+    function saveBook(title, authors, description, image, link) {
+        API.saveBook({
+            title: title,
+            authors: authors,
+            description: description,
+            image: image,
+            link: link
+        })
+    }
+
     function handleInputChange(event) {
         const { name, value } = event.target;
         setFormObject({...formObject, [name]: value})
@@ -53,7 +63,8 @@ function SearchBar() {
                       )}
                       <div className="card-body">
                         <p className="card-text">{book.volumeInfo.description}</p>
-                        <a className="btn btn-primary m-1" href={book.selfLink}>Details</a>
+                        <a className="btn btn-primary m-1" href={book.infoLink}>Details</a>
+                        <button className="btn btn-primary m-1" onClick={() => saveBook(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.description, book.volumeInfo.imageLinks.thumbnail, book.volumeInfo.infoLink)}>Save</button>
                       </div>
                     </div>
                   ))}
