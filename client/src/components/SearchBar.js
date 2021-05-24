@@ -43,14 +43,14 @@ function SearchBar() {
                         <input className="form control" onChange={handleInputChange} style={{"width": "100%", "height":"100%"}} name="title"></input>
                     </div>
                     <div className="col-sm-2">
-                        <button onClick={handleFormSubmit} className="btn btn-success">Search</button>
+                        <button onClick={handleFormSubmit} className="btn btn-success" style={{"float": "right"}}>Search</button>
                     </div>
                 </div>
             </div>
         </form>
         <div>
             {books.totalItems > 0 ? (
-                <div className="container text-center">
+                <div className="container text-center mt-3">
                 <div className="row justify-content-center">
                 {books.items.map(book => (
 
@@ -63,8 +63,12 @@ function SearchBar() {
                       )}
                       <div className="card-body">
                         <p className="card-text">{book.volumeInfo.description}</p>
-                        <a className="btn btn-primary m-1" href={book.infoLink}>Details</a>
-                        <button className="btn btn-primary m-1" onClick={() => saveBook(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.description, book.volumeInfo.imageLinks.thumbnail, book.volumeInfo.infoLink)}>Save</button>
+                        <a className="btn btn-primary m-1" href={book.volumeInfo.infoLink}>Details</a>
+                        <button className="btn btn-primary m-1" onClick={(e) => {
+                            saveBook(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.description, book.volumeInfo.imageLinks.thumbnail, book.volumeInfo.infoLink);
+                            e.target.setAttribute("disabled", "true")
+                            e.target.textContent = "Saved!"
+                        }}>Save</button>
                       </div>
                     </div>
                   ))}
