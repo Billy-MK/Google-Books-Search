@@ -12,7 +12,7 @@ function SearchBar() {
 
     function displayBooks(books) {
         // Add this function later
-        console.log("Books displayed on screen: " + books);
+        console.log("Books displayed on screen: " + JSON.stringify(books.data.items[0].volumeInfo.title));
     }
 
     function handleFormSubmit(event) {

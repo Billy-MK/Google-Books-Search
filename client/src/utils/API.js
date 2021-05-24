@@ -12,6 +12,6 @@ export default {
     },
 
     searchBooks: function(searchTerm) {
-      return axios.get("/api/googlebooks/")
+      return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + searchTerm)
     }
 }
