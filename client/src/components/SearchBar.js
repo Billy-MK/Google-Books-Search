@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import API from '../utils/API'
+import API from '../utils/API';
 
 function SearchBar() {
-
+    const [books, setBooks] = useState([])
     const [formObject, setFormObject] = useState({})
+
+    function loadBooks() {
+        if (formObject.title) {
+            API.searchBooks(formObject.title)
+            .then(res => setBooks(res.data))
+            .catch(err => console.log(err));
+        }
+    }
 
     function handleInputChange(event) {
         const { name, value } = event.target;
         setFormObject({...formObject, [name]: value})
       };
-
-    function displayBooks(books) {
-        // Add this function later
-        console.log("Books displayed on screen: " + JSON.stringify(books.data.items[0].volumeInfo.title));
-    }
-
+    
     function handleFormSubmit(event) {
-    event.preventDefault();
-    if (formObject.title) {
-        API.searchBooks(formObject.title)
-        .then(res => displayBooks(res))
-        .catch(err => console.log(err));
-    }
-    };
+        event.preventDefault();
+        loadBooks()
+        console.log(books)
+        };
 
     return (
+        <>
         <form>
             <div className="container">
                 <div className="row">
@@ -37,6 +38,34 @@ function SearchBar() {
                 </div>
             </div>
         </form>
+        <div>
+            {books.totalItems > 0 ? (
+                <div className="container text-center">
+                <div className="row justify-content-center">
+                {books.items.map(book => (
+
+                    <div key={book.id} className="card bg-light m-1" style={{"width": "30%"}}>
+                      <h3 className="card-title m-2"><strong>{book.volumeInfo.title}</strong></h3>
+                      {book.volumeInfo.imageLinks ? (
+                          <img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top" alt="..." style={{"height": "28rem"}}></img>
+                      ) : (
+                          <div></div>
+                      )}
+                      <div className="card-body">
+                        <p className="card-text">{book.volumeInfo.description}</p>
+                        <a className="btn btn-primary m-1" href={book.selfLink}>Details</a>
+                      </div>
+                    </div>
+                  ))}
+                  </div>
+                  </div>
+            ) : (
+                <div className="text-center m-5">
+                    No results to display
+                </div>
+            )}
+        </div>
+        </>
     )
 }
 
