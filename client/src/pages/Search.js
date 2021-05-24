@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SearchBar from "../components/SearchBar";
 
 function Search() {
     return (
@@ -6,7 +7,8 @@ function Search() {
             <div className="row m-3">
                 <h4>Search for a Book</h4>
             </div>
-            <div className="row m-3">  
+            <div className="row m-3"> 
+                <SearchBar />
             </div>
         </div>
     )
