@@ -23,6 +23,16 @@ function Booklist() {
         .catch(err => console.log(err));
     }
 
+    function truncateDescription(description) {
+      if (description) {
+        if (description.length > 450) {
+            let shortenedDescription = description.substring(0, description.indexOf(" ", 450)) + "..."
+            return shortenedDescription;
+        }
+        return description;
+      }
+    }
+
     return (
         <div>
             {books.length ? (
@@ -34,7 +44,7 @@ function Booklist() {
                       <h3 className="card-title m-2"><strong>{book.title}</strong></h3>
                       <img src={book.image} className="card-img-top" alt="..." style={{"height": "28rem"}}></img>
                       <div className="card-body">
-                        <p className="card-text">{book.description}</p>
+                        <p className="card-text">{truncateDescription(book.description)}</p>
                         <a className="btn btn-primary m-1" href={book.link}>Details</a>
                         <button className="btn btn-primary m-1" onClick={() => deleteBook(book._id)}>Remove</button>
                       </div>

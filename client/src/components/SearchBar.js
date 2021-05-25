@@ -34,6 +34,16 @@ function SearchBar() {
         console.log(books)
         };
 
+    function truncateDescription(description) {
+        if (description) {
+            if (description.length > 450) {
+                let shortenedDescription = description.substring(0, description.indexOf(" ", 450)) + "..."
+                return shortenedDescription;
+            }
+            return description;
+        }
+    }
+    
     return (
         <>
         <form>
@@ -62,7 +72,9 @@ function SearchBar() {
                           <div></div>
                       )}
                       <div className="card-body">
-                        <p className="card-text">{book.volumeInfo.description}</p>
+                        <p className="card-text">
+                            {truncateDescription(book.volumeInfo.description)}
+                        </p>
                         <a className="btn btn-primary m-1" href={book.volumeInfo.infoLink}>Details</a>
                         <button className="btn btn-primary m-1" onClick={(e) => {
                             saveBook(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.description, book.volumeInfo.imageLinks.thumbnail, book.volumeInfo.infoLink);
